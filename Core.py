@@ -1,6 +1,6 @@
 import socket
 from struct import *
-from Util import eth_length
+from Util import eth_length,mac_addr
 
 
 
@@ -19,7 +19,8 @@ class Core:
         mac_src = self.packet[6:12]
         self.eth_protocol = socket.ntohs(eth[2])
         
-        return self.packet,mac_dest, mac_src, self.eth_protocol
+        print('Destination MAC : ' + mac_addr(mac_dest) + ' Source MAC : ' + mac_addr(mac_src) + ' Protocol : ' + str(self.eth_protocol))
+
     
     def initiate(self):
         if self.eth_protocol == 8:
@@ -48,7 +49,7 @@ class Core:
                 17: self.udpProtocol
             }
             
-            protocol_handlers = protocol_handlers.get(protocol)
+            protocol_handlers = protocol_handlers.get(protocol, self.otherProtocolaHandler)
             protocol_handlers(iph_length)
              
         
@@ -135,4 +136,5 @@ class Core:
 
         print('Data : ', data)
 
-    
+    def otherProtocolaHandler(self):
+        print('Protocol other than TCP/UDP/ICMP')

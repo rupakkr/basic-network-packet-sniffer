@@ -1,5 +1,5 @@
 from Core import Core
-from Util import mac_addr,createSocket,eth_length
+from Util import createSocket,eth_length
 # from tabulate import tabulate
 
 
@@ -12,9 +12,7 @@ soc = createSocket()
 
 while True:
     
-    packet, mac_dest, mac_src, eth_protocol = core_instance.getHeaderInfo(soc)
-
-    print('Destination MAC : ' + mac_addr(mac_dest) + ' Source MAC : ' + mac_addr(mac_src) + ' Protocol : ' + str(eth_protocol))
+    core_instance.getHeaderInfo(soc)
     
     # Prepare the data for the table
     # table_data = [
