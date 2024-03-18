@@ -1,6 +1,6 @@
 from Core import Core
 from Util import mac_addr,createSocket,eth_length
-from tabulate import tabulate
+# from tabulate import tabulate
 
 
 # Create an instance of the Core class
